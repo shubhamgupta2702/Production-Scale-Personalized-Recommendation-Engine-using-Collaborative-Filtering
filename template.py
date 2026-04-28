@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+project_name = "Personalized Recommendation System"
 
 list_of_files=[
 
