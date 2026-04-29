@@ -14,8 +14,8 @@ from urllib.request import urlretrieve
 class DataIngestionConfig:
   artifacts_dir: str = 'artifacts'
   dataset_url:str = DATASET_URL
-  dataset_zip_path: str = os.path.join('artifacts', "books_data.zip")
   raw_data_dir: str = os.path.join('artifacts', "raw_data")
+  dataset_zip_path: str = os.path.join(raw_data_dir, "books_data.zip")
   ingested_data_dir: str = os.path.join('artifacts', "ingested_data")
   
   
@@ -29,7 +29,7 @@ class DataIngestion:
     Create required directories for data ingestion.
     """
     try:
-      os.makedirs(self.ingestion_config.artifact_dir, exist_ok=True)
+      os.makedirs(self.ingestion_config.artifacts_dir, exist_ok=True)
       os.makedirs(self.ingestion_config.raw_data_dir, exist_ok=True)
       os.makedirs(self.ingestion_config.ingested_data_dir, exist_ok=True)
 
@@ -69,11 +69,11 @@ class DataIngestion:
       logger.info("Unzipping data")
       
       with zipfile.ZipFile(zip_path, "r") as zip_ref:
-        zip_ref.extractall(self.ingestion_config.raw_data_dir)
+        zip_ref.extractall(self.ingestion_config.ingested_data_dir)
 
       logger.info("Dataset extracted successfully")
 
-      return self.ingestion_config.raw_data_dir
+      return self.ingestion_config.ingested_data_dir
     
     except Exception as e:
       logger.error("Failed while extracting dataset")
@@ -89,8 +89,6 @@ class DataIngestion:
       raw_data_path = self.extract_data()
 
       logger.info("Data ingestion completed successfully")
-
-      return raw_data_path
 
     except Exception as e:
       logger.error("Data ingestion pipeline failed")
