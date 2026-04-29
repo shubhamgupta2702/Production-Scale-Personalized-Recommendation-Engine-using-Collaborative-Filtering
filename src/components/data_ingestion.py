@@ -66,6 +66,15 @@ class DataIngestion:
       if not os.path.exists(zip_path):
         raise FileNotFoundError(f"Zip file not found at {zip_path}")
       
+      if os.path.exists(self.ingestion_config.ingested_data_dir):
+            for file in os.listdir(self.ingestion_config.ingested_data_dir):
+                os.remove(
+                    os.path.join(
+                        self.ingestion_config.ingested_data_dir,
+                        file
+                    )
+                )
+      
       logger.info("Unzipping data")
       
       with zipfile.ZipFile(zip_path, "r") as zip_ref:
