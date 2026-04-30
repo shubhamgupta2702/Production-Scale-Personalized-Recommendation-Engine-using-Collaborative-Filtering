@@ -69,10 +69,7 @@ class DataIngestion:
       if os.path.exists(self.ingestion_config.ingested_data_dir):
             for file in os.listdir(self.ingestion_config.ingested_data_dir):
                 os.remove(
-                    os.path.join(
-                        self.ingestion_config.ingested_data_dir,
-                        file
-                    )
+                    os.path.join(self.ingestion_config.ingested_data_dir,file)
                 )
       
       logger.info("Unzipping data")

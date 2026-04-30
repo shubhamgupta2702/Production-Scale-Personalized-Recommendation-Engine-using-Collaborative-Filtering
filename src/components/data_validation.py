@@ -24,7 +24,9 @@ class DataValidation:
   def data_preprocessing(self):
     try:
       logger.info("Data preprocessing started")
-      books = pd.read_csv(self.data_validation_config.books_csv_file, sep=";", on_bad_lines='skip', encoding='latin-1')
+      
+      books = pd.read_csv(self.data_validation_config.books_csv_file, sep=";", on_bad_lines='skip', encoding='latin-1', dtype={"Year-Of-Publication": str})
+      
       ratings = pd.read_csv(self.data_validation_config.ratings_csv_file, sep=";", on_bad_lines='skip', encoding='latin-1')
       
       logger.info(f"Shape of books dataframe: {books.shape}")
