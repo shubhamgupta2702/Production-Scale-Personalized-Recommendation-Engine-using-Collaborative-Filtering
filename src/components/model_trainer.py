@@ -31,7 +31,7 @@ class ModelTrainer:
       book_sparse = csr_matrix(book_pivot)
       logger.info(f"Sparse matrix created. type(book_sparse): {type(book_sparse)}")
       
-      model = NearestNeighbors(algorithm= 'brute')
+      model = NearestNeighbors(algorithm= 'brute', metric='cosine')
       model.fit(book_sparse)
       logger.info("Model trained")
       
