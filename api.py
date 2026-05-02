@@ -5,6 +5,25 @@ import os
 import pickle
 from src.logger.logger import logger
 from src.utils.utils import load_object
+import mlflow
+import dagshub
+from dotenv import load_dotenv
+
+load_dotenv()
+
+dagshub.init(
+    repo_owner="shubhamgupta43567",
+    repo_name="Production-Scale-Personalized-Recommendation-Engine-using-Collaborative-Filtering",
+    mlflow=True
+)
+
+mlflow.set_tracking_uri(
+    "https://dagshub.com/shubhamgupta43567/Production-Scale-Personalized-Recommendation-Engine-using-Collaborative-Filtering.mlflow"
+)
+
+mlflow.set_experiment(
+    "book_recommender_inference"
+)
 
 latency_history = []
 
@@ -125,6 +144,18 @@ def recommend_books(request: RecommendationRequest):
     latency_history.append(latency)
     
     average_latency = round((sum(latency_history)/ len(latency_history)), 4)
+    
+    
+    with mlflow.start_run():
+        mlflow.log_metric(
+        "latency_ms",
+        latency
+        )
+        
+        mlflow.log_metric(
+        "average_latency_ms",
+        average_latency
+        )
 
     logger.info(
             f"Recommendation generated in "
