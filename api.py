@@ -11,19 +11,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-dagshub.init(
-    repo_owner="shubhamgupta43567",
-    repo_name="Production-Scale-Personalized-Recommendation-Engine-using-Collaborative-Filtering",
-    mlflow=True
-)
-
 mlflow.set_tracking_uri(
     "https://dagshub.com/shubhamgupta43567/Production-Scale-Personalized-Recommendation-Engine-using-Collaborative-Filtering.mlflow"
 )
 
-mlflow.set_experiment(
-    "book_recommender_inference"
-)
+os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("MLFLOW_TRACKING_USERNAME")
+
+os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("MLFLOW_TRACKING_PASSWORD")
+logger.info("MLflow tracking URI configured")
+
+mlflow.set_experiment("book_recommender_inference")
 
 latency_history = []
 
