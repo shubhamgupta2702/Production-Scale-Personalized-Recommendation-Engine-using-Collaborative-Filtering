@@ -1,4 +1,4 @@
-<img width="1811" height="805" alt="image" src="https://github.com/user-attachments/assets/23be7123-5ddb-4a0b-a6d3-e62a376da810" /># 📚 Production-Scale Personalized Book Recommendation Engine
+📚 Production-Scale Personalized Book Recommendation Engine
 
 A production-grade personalized book recommendation system built using **Collaborative Filtering**, designed with modular ML pipelines, experiment tracking, API serving, containerization, and CI/CD automation.
 
