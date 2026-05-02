@@ -151,7 +151,7 @@ class ModelTrainer:
 
             mlflow.sklearn.log_model(
                 sk_model=model,
-                name="book_recommender_model"
+                artifact_path="book_recommender_model"
                 )
 
             logger.info(
