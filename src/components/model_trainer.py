@@ -11,21 +11,6 @@ import dagshub
 import time
 from dotenv import load_dotenv
 
-load_dotenv()
-
-mlflow.set_tracking_uri(
-    "https://dagshub.com/shubhamgupta43567/Production-Scale-Personalized-Recommendation-Engine-using-Collaborative-Filtering.mlflow"
-)
-
-if os.getenv("MLFLOW_TRACKING_USERNAME") and os.getenv("MLFLOW_TRACKING_PASSWORD"):
-    dagshub.init(
-        repo_owner="shubhamgupta43567",
-        repo_name="Production-Scale-Personalized-Recommendation-Engine-using-Collaborative-Filtering",
-        mlflow=True
-    )
-mlflow.set_experiment(
-    "book_recommender_training"
-)
 
 @dataclass
 class ModelTrainerConfig:
@@ -42,6 +27,22 @@ class ModelTrainer:
     
   def model_trainer(self):
     try:
+        load_dotenv()
+
+        mlflow.set_tracking_uri(
+            "https://dagshub.com/shubhamgupta43567/Production-Scale-Personalized-Recommendation-Engine-using-Collaborative-Filtering.mlflow"
+        )
+
+        if os.getenv("MLFLOW_TRACKING_USERNAME") and os.getenv("MLFLOW_TRACKING_PASSWORD"):
+            dagshub.init(
+                repo_owner="shubhamgupta43567",
+                repo_name="Production-Scale-Personalized-Recommendation-Engine-using-Collaborative-Filtering",
+                mlflow=True
+            )
+
+        mlflow.set_experiment("book_recommender_training")
+
+        logger.info("MLflow initialized")
         logger.info("Model trainer started")
 
         book_pivot = pickle.load(
