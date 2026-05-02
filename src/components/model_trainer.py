@@ -33,21 +33,11 @@ class ModelTrainer:
             "https://dagshub.com/shubhamgupta43567/Production-Scale-Personalized-Recommendation-Engine-using-Collaborative-Filtering.mlflow"
         )
 
-        os.environ[
-                "MLFLOW_TRACKING_USERNAME"
-            ] = os.getenv(
-                "MLFLOW_TRACKING_USERNAME"
-            )
+        os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("MLFLOW_TRACKING_USERNAME")
 
-            os.environ[
-                "MLFLOW_TRACKING_PASSWORD"
-            ] = os.getenv(
-                "MLFLOW_TRACKING_PASSWORD"
-            )
+        os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("MLFLOW_TRACKING_PASSWORD")
 
-            logger.info(
-                "MLflow tracking URI configured"
-            )
+        logger.info("MLflow tracking URI configured")
         mlflow.set_experiment("book_recommender_training")
 
         logger.info("MLflow initialized")
